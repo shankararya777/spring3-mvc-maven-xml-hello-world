@@ -1,7 +1,7 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" 
+<project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 
-                             http://maven.apache.org/maven-v4_0_0.xsd">
+                             http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.madhu</groupId>
@@ -14,6 +14,8 @@
         <jdk.version>1.6</jdk.version>
         <spring.version>3.2.13.RELEASE</spring.version>
         <jstl.version>1.2</jstl.version>
+        <maven.compiler.plugin.version>3.10.1</maven.compiler.plugin.version>
+        <maven.war.plugin.version>3.3.2</maven.war.plugin.version>
     </properties>
 
     <dependencies>
@@ -33,18 +35,25 @@
     <build>
         <plugins>
 
-            <!-- Corrected Maven Compiler Plugin -->
+            <!-- Compiler plugin -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.10.1</version>
+                <version>${maven.compiler.plugin.version}</version>
                 <configuration>
                     <source>${jdk.version}</source>
                     <target>${jdk.version}</target>
                 </configuration>
             </plugin>
 
-            <!-- Jetty plugin for running WAR locally -->
+            <!-- WAR plugin -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>${maven.war.plugin.version}</version>
+            </plugin>
+
+            <!-- Jetty plugin for running locally -->
             <plugin>
                 <groupId>org.eclipse.jetty</groupId>
                 <artifactId>jetty-maven-plugin</artifactId>
@@ -57,7 +66,7 @@
                 </configuration>
             </plugin>
 
-            <!-- Eclipse integration plugin -->
+            <!-- Eclipse plugin for IDE integration -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-eclipse-plugin</artifactId>
