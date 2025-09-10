@@ -2,33 +2,52 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 
                              http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.madhu</groupId>
-    <artifactId>spring3-mvc-maven-xml-hello-world</artifactId>
-    <version>1.2</version>
+    <artifactId>spring-mvc-hello-world</artifactId>
+    <version>1.0.0</version>
     <packaging>war</packaging>
-    <name>spring3 mvc maven</name>
+    <name>Spring MVC Maven Hello World</name>
 
     <properties>
-        <jdk.version>1.6</jdk.version>
-        <spring.version>3.2.13.RELEASE</spring.version>
+        <java.version>1.8</java.version>
+        <spring.version>5.3.39</spring.version>
         <jstl.version>1.2</jstl.version>
-        <maven.compiler.plugin.version>3.10.1</maven.compiler.plugin.version>
-        <maven.war.plugin.version>3.3.2</maven.war.plugin.version>
+        <maven.compiler.plugin.version>3.11.0</maven.compiler.plugin.version>
+        <maven.war.plugin.version>3.4.0</maven.war.plugin.version>
+        <jetty.plugin.version>9.4.54.v20240208</jetty.plugin.version>
     </properties>
 
     <dependencies>
+        <!-- Spring MVC -->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-webmvc</artifactId>
             <version>${spring.version}</version>
         </dependency>
 
+        <!-- JSTL -->
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>jstl</artifactId>
             <version>${jstl.version}</version>
+        </dependency>
+
+        <!-- Servlet API (provided by container like Tomcat/Jetty) -->
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>4.0.1</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- Optional: logging -->
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>1.4.14</version>
         </dependency>
     </dependencies>
 
@@ -41,8 +60,8 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>${maven.compiler.plugin.version}</version>
                 <configuration>
-                    <source>${jdk.version}</source>
-                    <target>${jdk.version}</target>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
                 </configuration>
             </plugin>
 
@@ -53,29 +72,16 @@
                 <version>${maven.war.plugin.version}</version>
             </plugin>
 
-            <!-- Jetty plugin for running locally -->
+            <!-- Jetty plugin (run project locally with mvn jetty:run) -->
             <plugin>
                 <groupId>org.eclipse.jetty</groupId>
                 <artifactId>jetty-maven-plugin</artifactId>
-                <version>9.2.11.v20150529</version>
+                <version>${jetty.plugin.version}</version>
                 <configuration>
                     <scanIntervalSeconds>10</scanIntervalSeconds>
                     <webApp>
-                        <contextPath>/spring3</contextPath>
+                        <contextPath>/springmvc</contextPath>
                     </webApp>
-                </configuration>
-            </plugin>
-
-            <!-- Eclipse plugin for IDE integration -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-eclipse-plugin</artifactId>
-                <version>2.9</version>
-                <configuration>
-                    <downloadSources>true</downloadSources>
-                    <downloadJavadocs>true</downloadJavadocs>
-                    <wtpversion>2.0</wtpversion>
-                    <wtpContextName>spring3</wtpContextName>
                 </configuration>
             </plugin>
 
